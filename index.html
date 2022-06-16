@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Weather</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/styles.css"/>
+</head>
+<body>
+<div class="container">
+    <div id="weather" class="weather-block">
+        <div>
+            <header>
+                <ul class="navigation-cities">
+                    <li class="navigation-city"><a href="#">Irpin</a></li>
+                    <li class="navigation-city"><a href="#">Bucha</a></li>
+                    <li class="navigation-city"><a href="#">Gostomel'</a></li>
+                    <li class="navigation-city"><a href="#">Mariupol'</a></li>
+                </ul>
+            </header>
+            <div>
+                <div class="">
+                    <div>
+                        <div class="clearfix">
+                            <form class="float-left" id="search_form"><input type="text" placeholder="Enter a city"
+                                                                             autocomplete="off"
+                                                                             value="" id="city_input"><input
+                                    type="submit" class="btn btn-primary"
+                                    value="Search"></form>
+                            <button class="float-left btn btn-success" id="currentCityBtn">Current</button>
+                        </div>
+                        <div class="weather-summary">
+                            <div class="weather-summary-header">
+                                <h1 id="town">Kyiv</h1>
+                                <div class="weather-detail__text" id="current_date">Sunday 13:05</div>
+                                <div class="weather-detail__text" id="weatherDesc">Sunny</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="clearfix">
+                                        <div class="float-left weather-icon">
+                                            <span class="weather-emoji">☀️</span>
+                                        </div>
+                                        <div class="weather-temp weather-temp--today">
+                                            <span id="temperature">22</span>
+                                            <span class="units">
+                                                <span class="units_link active" id="celsius-link">°C</span> |
+                                                <span class="units_link" id="fahrenheit-link">°F</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="weather-detail__text">Humidity: <span id="humidity">57</span>%</div>
+                                    <div class="weather-detail__text">Wind: <span id="wind">5</span>km/h</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div class="day">Mon</div>
+                                <div class="emoji">
+                                    <span class="weather-emoji">🌤</span>
+                                </div>
+                                <div class="temperature">15°</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="day">Tue</div>
+                                <div class="emoji">
+                                    <span class="weather-emoji">🌤</span>
+                                </div>
+                                <div class="temperature">21°</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="day">Wed</div>
+                                <div class="emoji">
+                                    <span class="weather-emoji">🌦</span>
+                                </div>
+                                <div class="temperature">18°</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="day">Thu</div>
+                                <div class="emoji">
+                                    <span class="weather-emoji">☀️</span>
+                                </div>
+                                <div class="temperature">27°</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="day">Fri</div>
+                                <div class="emoji">
+                                    <span class="weather-emoji">🌤</span>
+                                </div>
+                                <div class="temperature">15°</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <small>
+        <a href="https://github.com/dashacherednichenko/sheCodes" target="_blank">Open-source code</a>, by Dariia Piven
+    </small>
+</div>
+<script src="src/index.js"></script>
+</body>
+</html>
