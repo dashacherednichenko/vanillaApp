@@ -89,7 +89,7 @@ function changeUnit(event) {
         temp.innerHTML = temp_default;
     }
 }
-
+axios.get(`${url}?q=kyiv&appid=${apiKey}&units=metric`).then(displayWeather);
 date_container.innerHTML = formatDate(now);
 search_form.addEventListener('submit', changeCity);
 currentCityBtn.addEventListener('click', findCity);
