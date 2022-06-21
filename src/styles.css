@@ -60,6 +60,9 @@ input[type=submit]{
 .temperature, .day, .weather-summary-header .weather-detail__text {
     color: grey;
 }
+.temperature, .day, .weather-summary-header .weather-detail__text:first-letter{
+    text-transform: capitalize;
+}
 .weather-emoji{
     font-size: 38px;
 }
