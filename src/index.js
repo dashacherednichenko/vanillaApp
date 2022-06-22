@@ -5,6 +5,7 @@ let now = new Date();
 let search_form = document.getElementById('search_form');
 let currentCityBtn = document.getElementById('currentCityBtn');
 let city = document.getElementById('town');
+let nav_cities=document.querySelectorAll('.navigation-city');
 let humidity = document.getElementById('humidity');
 let wind = document.getElementById('wind');
 let search_city = document.getElementById('city_input');
@@ -68,9 +69,9 @@ function displayWeather(res) {
     changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc);
 }
 
-function changeCity(event) {
+function changeCity(event, city) {
     event.preventDefault();
-    let apiUrl = `${url}?q=${search_city.value}&appid=${apiKey}&units=metric`;
+    let apiUrl = `${url}?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather)
 };
 
@@ -98,6 +99,7 @@ function changeUnit(event) {
     }
 }
 axios.get(`${url}?q=kyiv&appid=${apiKey}&units=metric`).then(displayWeather);
-search_form.addEventListener('submit', changeCity);
+search_form.addEventListener('submit', (ev) => changeCity(ev, search_city.value));
 currentCityBtn.addEventListener('click', findCity);
 units_links.forEach(el => el.addEventListener('click', changeUnit));
+nav_cities.forEach(el => el.addEventListener('click', (ev) => changeCity(ev, el.firstChild.innerText)));
