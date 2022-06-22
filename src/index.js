@@ -58,7 +58,13 @@ function displayWeather(res) {
     let cityHumidity = res.data.main.humidity;
     let cityWind = Math.round(res.data.wind.speed);
     let desc = res.data.weather[0].description;
+    let iconElement = document.querySelector("#icon");
     console.log(cityTemp);
+    iconElement.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
+    );
+    iconElement.setAttribute("alt", res.data.weather[0].description);
     changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc);
 }
 
