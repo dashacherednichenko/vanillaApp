@@ -56,6 +56,8 @@ input[type=submit]{
 .weather-temp--today .units span.active {
     color: #333;
     font-weight: bold;
+    cursor: default;
+    text-decoration: none;
 }
 .temperature, .day, .weather-summary-header .weather-detail__text {
     color: grey;
