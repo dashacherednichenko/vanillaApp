@@ -1,9 +1,24 @@
-.weather-block {
-    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 16%), 0 0 0 1px rgb(0 0 0 / 8%);
-    margin: 40px 0;
-    max-width: 630px;
-    padding: 20px 16px 24px;
+body {
+    background: #f9f7fe;
 }
+
+a {
+    color: #885df1;
+}
+
+a:hover {
+    color: #885df1;
+}
+
+.weather-block {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 30px 50px rgb(65 50 100 / 8%);
+    margin: 40px auto;
+    max-width: 770px;
+    padding: 40px;
+}
+
 input[type=text] {
     border-radius: 0.25rem;
     border: none;
@@ -13,26 +28,43 @@ input[type=text] {
     padding: 10px;
     width: 300px;
 }
+
 .btn {
     position: relative;
     height: 45px;
     margin-left: 10px;
 }
-input[type=submit]{
-    top:-2px;
+
+.btn-primary {
+    background-color: #885df1;
+    border-color: #885df1;
 }
+
+.btn-primary:hover {
+    border-color: #662eed;
+    background: #662eed;
+}
+
+
+input[type=submit] {
+    top: -2px;
+}
+
 .navigation-cities {
     list-style: none;
     margin: 0;
     padding: 0 0 20px;
 }
+
 .navigation-city {
     display: inline;
     margin: 0 20px 0 0;
 }
+
 .weather-summary {
     padding: 30px 0;
 }
+
 .weather-temp--today {
     color: #333;
     float: left;
@@ -41,46 +73,57 @@ input[type=submit]{
     line-height: 1;
     padding-left: 10px;
 }
+
 .weather-temp--today .units {
     font-size: 16px;
     color: grey;
     vertical-align: top;
 }
+
 .weather-temp--today .units span {
     cursor: pointer;
 
 }
+
 .weather-temp--today .units span:hover {
     text-decoration: underline;
 }
+
 .weather-temp--today .units span.active {
     color: #333;
     font-weight: bold;
     cursor: default;
     text-decoration: none;
 }
+
 .temperature, .day, .weather-summary-header .weather-detail__text {
     color: grey;
 }
-.temperature, .day, .weather-summary-header .weather-detail__text:first-letter{
+
+.temperature, .day, .weather-summary-header .weather-detail__text:first-letter {
     text-transform: capitalize;
 }
-.weather-emoji{
+
+.weather-emoji {
     font-size: 38px;
 }
+
 .weather-emoji img {
     margin-right: 5px;
     height: 56px;
     width: 56px;
 }
-.day{
+
+.day {
     font-size: 14px;
     text-align: center;
 }
-.emoji{
+
+.emoji {
     text-align: center;
 }
-.temperature{
+
+.temperature {
     text-align: center;
     font-size: 22px;
 }

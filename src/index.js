@@ -5,16 +5,17 @@ let now = new Date();
 let search_form = document.getElementById('search_form');
 let currentCityBtn = document.getElementById('currentCityBtn');
 let city = document.getElementById('town');
-let nav_cities=document.querySelectorAll('.navigation-city');
+let nav_cities = document.querySelectorAll('.navigation-city');
 let humidity = document.getElementById('humidity');
 let wind = document.getElementById('wind');
 let search_city = document.getElementById('city_input');
 let units_links = document.querySelectorAll(".units_link");
 let temp = document.getElementById("temperature");
 let temp_default = temp.innerHTML;
+let firstCity = 'kyiv';
 
 function formatDate(timestamp) {
-    let now = new Date (timestamp);
+    let now = new Date(timestamp);
     let day = now.getDay();
     let days = [
         "Sunday",
@@ -26,15 +27,14 @@ function formatDate(timestamp) {
         "Saturday"
     ];
     let hours = now.getHours();
-    if (hours < 10) {
-        hours = "0".concat(hours);
-    }
     let minutes = now.getMinutes();
-    if (minutes < 10) {
-        minutes = "0".concat(minutes);
+    if (hours < 10) {
+        hours = `0${hours}`;
     }
-    let dateFormat = `${days[day]}, ${hours}:${minutes}`;
-    return dateFormat;
+    if (minutes < 10) {
+        minutes = `0${minutes}`;
+    }
+    return `${days[day]}, ${hours}:${minutes}`;
 }
 
 function clearSearchInput() {
@@ -52,7 +52,6 @@ function changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc) {
 }
 
 function displayWeather(res) {
-    console.log(res.data);
     date_container.innerHTML = formatDate(res.data.dt * 1000);
     let cityTemp = Math.round(res.data.main.temp);
     let cityName = res.data.name;
@@ -60,7 +59,6 @@ function displayWeather(res) {
     let cityWind = Math.round(res.data.wind.speed);
     let desc = res.data.weather[0].description;
     let iconElement = document.querySelector("#icon");
-    console.log(cityTemp);
     iconElement.setAttribute(
         "src",
         `http://openweathermap.org/img/wn/${res.data.weather[0].icon}@2x.png`
@@ -73,13 +71,11 @@ function changeCity(event, city) {
     event.preventDefault();
     let apiUrl = `${url}?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather)
-};
+}
 
 function handlePosition(position) {
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
-    console.log(latitude);
-    console.log(longitude);
     let apiUrl = `${url}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayWeather);
 }
@@ -98,7 +94,8 @@ function changeUnit(event) {
         temp.innerHTML = temp_default;
     }
 }
-axios.get(`${url}?q=kyiv&appid=${apiKey}&units=metric`).then(displayWeather);
+
+axios.get(`${url}?q=${firstCity}&appid=${apiKey}&units=metric`).then(displayWeather);
 search_form.addEventListener('submit', (ev) => changeCity(ev, search_city.value));
 currentCityBtn.addEventListener('click', findCity);
 units_links.forEach(el => el.addEventListener('click', changeUnit));
