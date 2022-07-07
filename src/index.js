@@ -29,7 +29,6 @@ function unitToDefault(){
 
 function displayForecast(res) {
     let forecastData = res.data.daily;
-    console.log('NEWres', forecastData);
     let forecast = document.querySelector('#forecast');
     let forecastHtml = `<div class="row">`;
     forecastData.forEach(function (day, i) {
@@ -98,7 +97,6 @@ function changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc) {
 
 function displayWeather(res) {
     unitToDefault();
-    console.log('res', res, res.data.coord);
     date_container.innerHTML = formatDate(res.data.dt * 1000);
     let cityTemp = Math.round(res.data.main.temp);
     let cityName = res.data.name;
