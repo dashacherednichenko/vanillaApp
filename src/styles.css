@@ -99,6 +99,10 @@ input[type=submit] {
 .temperature, .day, .weather-summary-header .weather-detail__text {
     color: grey;
 }
+.temp-min {
+    color:#b2b2b2;
+    margin-left: 10px;
+}
 
 .temperature, .day, .weather-summary-header .weather-detail__text:first-letter {
     text-transform: capitalize;
@@ -106,6 +110,7 @@ input[type=submit] {
 
 .weather-emoji {
     font-size: 38px;
+    display: inline-block;
 }
 
 .weather-emoji img {
@@ -125,6 +130,6 @@ input[type=submit] {
 
 .temperature {
     text-align: center;
-    font-size: 22px;
+    font-size: 18px;
 }
 

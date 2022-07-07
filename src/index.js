@@ -14,6 +14,45 @@ let temp = document.getElementById("temperature");
 let temp_default = temp.innerHTML;
 let firstCity = 'kyiv';
 
+function formatDay(date) {
+    let now = new Date(date * 1000);
+    let day = now.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return days[day];
+}
+
+function displayForecast(res) {
+    let forecastData = res.data.daily;
+    console.log('NEWres', forecastData);
+    let forecast = document.querySelector('#forecast');
+    let forecastHtml = `<div class="row">`;
+    forecastData.forEach(function (day, i) {
+        if (i < 6) {
+            forecastHtml = forecastHtml + `
+            <div class="col-sm-2">
+                <div class="day">${formatDay(day.dt)}</div>
+                <div class="emoji">
+                    <span class="weather-emoji">
+                        <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="Clear" class=""/>️
+                    </span>
+                </div>
+                <div class="temperature">
+                    <span class="temp-max">${Math.round(day.temp.max)}°</span>
+                    <span class="temp-min">${Math.round(day.temp.min)}°</span>
+                </div>
+           </div>             
+        `;
+        }
+    })
+    forecastHtml = forecastHtml + `</div>`
+    forecast.innerHTML = forecastHtml;
+}
+
+function getForecast(coord) {
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayForecast);
+}
+
 function formatDate(timestamp) {
     let now = new Date(timestamp);
     let day = now.getDay();
@@ -52,6 +91,7 @@ function changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc) {
 }
 
 function displayWeather(res) {
+    console.log('res', res, res.data.coord);
     date_container.innerHTML = formatDate(res.data.dt * 1000);
     let cityTemp = Math.round(res.data.main.temp);
     let cityName = res.data.name;
@@ -65,6 +105,7 @@ function displayWeather(res) {
     );
     iconElement.setAttribute("alt", res.data.weather[0].description);
     changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc);
+    getForecast(res.data.coord);
 }
 
 function changeCity(event, city) {
