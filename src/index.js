@@ -13,12 +13,18 @@ let units_links = document.querySelectorAll(".units_link");
 let temp = document.getElementById("temperature");
 let temp_default = temp.innerHTML;
 let firstCity = 'kyiv';
+let coord = {};
 
 function formatDay(date) {
     let now = new Date(date * 1000);
     let day = now.getDay();
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     return days[day];
+}
+
+function unitToDefault(){
+    units_links.forEach(el => el.classList.remove("active"));
+    document.getElementById('celsius-link').classList.add("active");
 }
 
 function displayForecast(res) {
@@ -48,8 +54,8 @@ function displayForecast(res) {
     forecast.innerHTML = forecastHtml;
 }
 
-function getForecast(coord) {
-    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&appid=${apiKey}&units=metric`;
+function getForecast(coord, unit) {
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coord.lat}&lon=${coord.lon}&exclude=hourly,minutely&appid=${apiKey}&units=${unit}`;
     axios.get(apiUrl).then(displayForecast);
 }
 
@@ -91,6 +97,7 @@ function changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc) {
 }
 
 function displayWeather(res) {
+    unitToDefault();
     console.log('res', res, res.data.coord);
     date_container.innerHTML = formatDate(res.data.dt * 1000);
     let cityTemp = Math.round(res.data.main.temp);
@@ -105,7 +112,8 @@ function displayWeather(res) {
     );
     iconElement.setAttribute("alt", res.data.weather[0].description);
     changeForecast(cityName, cityTemp, cityHumidity, cityWind, desc);
-    getForecast(res.data.coord);
+    coord = res.data.coord;
+    getForecast(coord, 'metric');
 }
 
 function changeCity(event, city) {
@@ -131,7 +139,9 @@ function changeUnit(event) {
     click_unit.classList.add("active");
     if (click_unit.id === 'fahrenheit-link') {
         temp.innerHTML = Math.round(temp_default * 9 / 5 + 32);
+        getForecast(coord, 'imperial');
     } else {
+        getForecast(coord, 'metric');
         temp.innerHTML = temp_default;
     }
 }
